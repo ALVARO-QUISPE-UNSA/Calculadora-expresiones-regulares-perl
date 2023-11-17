@@ -4,6 +4,7 @@ use warnings;
 
 my $exp = <STDIN>;
 chomp( $exp );
-if ($exp =~ /^([\-|\+]?[\d]+)\s*([\-|\+][\d]+(.)*$)/) {
-  print "\n";
+if ($exp =~ /^([\-|\+]?[\d]+)\s*([\-|\+][\d]+)(.)*$/) {
+  $exp = $1.$2;
+  print "$exp\n";
 }
