@@ -2,10 +2,29 @@
 use strict;
 use warnings;
 
+sub cal {
+  if ($_[0] =~ /^([\-|\+]?[\d]+)\s*([\-|\+][\d]+)(.*)$/) {
+    my $a = $1 + $2;
+    $_[0] = $a.$3;
+    return cal($_[0]);
+  } else {
+    return $_[0];
+  }
+}
+#MAIN------------
 my $exp = <STDIN>;
 chomp( $exp );
-if ($exp =~ /^([\-|\+]?[\d]+)\s*([\-|\+][\d]+)(.)*$/) {
+print cal($exp);
+print "\n";
+
+
+
+=pod
+if ($exp =~ /^([\-|\+]?[\d]+)\s*([\-|\+][\d]+)(.*)$/) {
   my $a = $1 + $2;
-  $exp = $3;
+  $exp = $a.$3;
   print "$exp\n";
+} else {
+  print "No encontrado\n";
 }
+=cut
