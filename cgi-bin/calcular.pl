@@ -19,12 +19,3 @@ print "\n";
 
 
 
-=pod
-if ($exp =~ /^([\-|\+]?[\d]+)\s*([\-|\+][\d]+)(.*)$/) {
-  my $a = $1 + $2;
-  $exp = $a.$3;
-  print "$exp\n";
-} else {
-  print "No encontrado\n";
-}
-=cut
