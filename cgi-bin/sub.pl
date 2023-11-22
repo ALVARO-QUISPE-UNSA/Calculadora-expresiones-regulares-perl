@@ -17,10 +17,7 @@ if ($exp =~ /^([\-|\+]?[\d]+)\s*([\-|\+][\d]+)(.*)$/) {
   print "No encontrado\n";
 }
 =cut
-#MAIN-----------
-my $exp = <STDIN>;
-chomp($exp);
-
+=pod
 if ($exp =~ /^([\-|\+]?[\d]+)\s*([\*|\/])\s*([\-|\+]?[\d]+)(.*)$/) {
   my $a;
   if ($2 eq "*") {
@@ -28,9 +25,13 @@ if ($exp =~ /^([\-|\+]?[\d]+)\s*([\*|\/])\s*([\-|\+]?[\d]+)(.*)$/) {
   } else {
     $a = $1 / $3;
   }
-  $exp = $a.$4;
-  print $exp."\n";
+=cut
+#MAIN-----------
+my $exp = <STDIN>;
+chomp($exp);
+
+if ($exp =~ /(.*)\((.+)\)(.*)/) {
   print "Tiene\n";
 } else {
-  print "No encontrado\n";
+  print "No tiene\n";
 }

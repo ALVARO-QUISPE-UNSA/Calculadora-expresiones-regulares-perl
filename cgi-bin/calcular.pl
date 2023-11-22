@@ -2,11 +2,17 @@
 use strict;
 use warnings;
 
-sub cal {
-  if ($_[0] =~ /^([\-|\+]?[\d]+)\s*([\-|\+][\d]+)(.*)$/) {
-    my $a = $1 + $2;
-    $_[0] = $a.$3;
-    return cal($_[0]);
+#Calculas las sumas
+sub sum {
+  if ($_[0] =~ /^([\-|\+])?\s*([\d]+)\s*([\-|\+])\s*([\d]+)(.*)$/) {
+    my $s1 = $2;
+    if (defined($1)) {
+      $s1 = $1.$2;
+    }
+    my $s2 = $3.$4;
+    my $s = $s1 + $s2;
+    $_[0] = $s.$5;
+    return sum($_[0]);
   } else {
     return $_[0];
   }
@@ -14,7 +20,7 @@ sub cal {
 #MAIN------------
 my $exp = <STDIN>;
 chomp( $exp );
-print cal($exp);
+print sum($exp);
 print "\n";
 
 
