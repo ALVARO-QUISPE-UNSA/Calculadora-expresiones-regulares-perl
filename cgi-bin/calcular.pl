@@ -12,20 +12,14 @@ sub sum {
     my $s2 = $3.$4;
     my $s = $s1 + $s2;
     return sum($s.$5);
-  } elsif ($_[0] =~ /\d+/) {
-    return $_[0];
-  } else {
-    print "Patrón de suma no encontrado en $_[0]\n";
-  }
+  } 
+  return $_[0];
 }
 
 sub mult {
-  if ($_[0] =~ /^([\-|\+])?([\d]+)\s*([\*|\/])\s*([\-|\+])?([\d]+)(.*)$/) {
+  if ($_[0] =~ /(.*?)([\d]+)\s*([\*|\/])\s*([\-|\+])?([\d]+)(.*)$/) {
     #definir las variables
     my $p1 = $2;
-    if (defined($1)) {
-      $p1 = $1.$2;
-    }
     my $p2 = $5;
     if (defined($4)) {
       $p2 = $4.$5;
@@ -37,8 +31,9 @@ sub mult {
     } else {
       $p = $p1 / $p2;
     }
-    return $p.$6;
+    return $1.$p.$6;
   }
+  return $_[0];
 }
 
 sub calculate {
@@ -54,10 +49,13 @@ sub calculate {
     $_[0] = $1.calculate($2).$3;
     return calculate($_[0]);
   }
+
   return $_[0];
 }
 #MAIN------------
 my $exp = <STDIN>;
 chomp( $exp );
-my $r = calculate($exp);
-print $r."\n";
+#calculate($exp);
+#print $exp."\n";
+print mult($exp)."\n";
+
