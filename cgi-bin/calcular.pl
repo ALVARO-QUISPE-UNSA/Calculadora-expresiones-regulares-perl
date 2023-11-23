@@ -18,6 +18,7 @@ sub sum {
     print "Patrón de suma no encontrado en $_[0]\n";
   }
 }
+
 sub mult {
   if ($_[0] =~ /^([\-|\+])?([\d]+)\s*([\*|\/])\s*([\-|\+])?([\d]+)(.*)$/) {
     #definir las variables
@@ -39,11 +40,23 @@ sub mult {
     return $p.$6;
   }
 }
+
+sub calculate {
+  if ($_[0] =~ /(.*)([\+|-])([\+|-])(.*)/) {
+    if ($2 eq $3) {
+      $_[0] = $1."+".$4;
+    } else {
+      $_[0] = $1."-".$4;
+    }
+    print "$_[0]\n";
+  }
+  if ($_[0] =~ /(.*)\(.+\)([^)])*/) {
+    return $2."\n";
+  } else {
+    print "nope \n";
+  }
+}
 #MAIN------------
 my $exp = <STDIN>;
 chomp( $exp );
-print mult($exp)."\n";
-$exp = mult($exp);
-print sum($exp);
-print "\n";
-
+calculate($exp);
