@@ -48,6 +48,7 @@ sub calculate {
     } else {
       $_[0] = $1."-".$4;
     }
+    print "$_[0]\n";
     return calculate($_[0]);
   }
   if ($_[0] =~ /(.*)\(.+\)([^)])*/) {
@@ -59,4 +60,4 @@ sub calculate {
 #MAIN------------
 my $exp = <STDIN>;
 chomp( $exp );
-print calculate($exp);
+print calculate($exp)."\n";
