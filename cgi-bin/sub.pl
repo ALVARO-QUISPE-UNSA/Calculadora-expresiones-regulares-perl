@@ -30,8 +30,9 @@ if ($exp =~ /^([\-|\+]?[\d]+)\s*([\*|\/])\s*([\-|\+]?[\d]+)(.*)$/) {
 my $exp = <STDIN>;
 chomp($exp);
 
-if ($exp =~ /\( \)/) {
-  print "Tiene\n";
+if ($exp =~ /(.*)\((.+)\)([^)]*)/) {
+  $exp = $1.$2.$3;
+  print "$exp\n";
 } else {
   print "No tiene\n";
 }

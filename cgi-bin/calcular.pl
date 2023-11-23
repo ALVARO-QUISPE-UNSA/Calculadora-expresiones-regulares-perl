@@ -48,16 +48,16 @@ sub calculate {
     } else {
       $_[0] = $1."-".$4;
     }
-    print "$_[0]\n";
     return calculate($_[0]);
   }
-  if ($_[0] =~ /(.*)\(.+\)([^)])*/) {
-    return $2."\n";
-  } else {
-    print "nope \n";
+  if ($_[0] =~ /(.*)\((.+)\)([^)]*)/) {
+    $_[0] = $1.calculate($2).$3;
+    return calculate($_[0]);
   }
+  return $_[0];
 }
 #MAIN------------
 my $exp = <STDIN>;
 chomp( $exp );
-print calculate($exp)."\n";
+my $r = calculate($exp);
+print $r."\n";
