@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
+#Partes
 
 #Calculas las sumas
 sub sum {
@@ -45,17 +46,14 @@ sub calculate {
     }
     return calculate($_[0]);
   }
-  if ($_[0] =~ /(.*)\((.+)\)([^)]*)/) {
+  if ($_[0] =~ /(.*)\((.+?)\)(.*)/) {
+    ##print $2."\n";
     $_[0] = $1.calculate($2).$3;
     return calculate($_[0]);
   }
-
-  return $_[0];
+  return sum(mult($_[0]));
 }
 #MAIN------------
 my $exp = <STDIN>;
 chomp( $exp );
-#calculate($exp);
-#print $exp."\n";
-print mult($exp)."\n";
-
+print calculate($exp)."\n";
