@@ -45,4 +45,21 @@ input[type="submit"]:hover {
 label {
   margin: 10px;
 }
-
+div {
+  background-color: #fee;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+  border-radius: 20px;
+}
+.answer {
+  width: 300px;
+  height: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  margin: 10px;
+  font-size: 16px;
+}

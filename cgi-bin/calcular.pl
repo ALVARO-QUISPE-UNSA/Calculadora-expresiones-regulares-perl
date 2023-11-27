@@ -1,7 +1,8 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-#Partes
+use CGI;
+
 
 #Calculas las sumas
 sub sum {
@@ -32,7 +33,8 @@ sub mult {
     } else {
       $p = $p1 / $p2;
     }
-    return $1.$p.$6;
+    return mult($1.$p.$6);
+    #return $1.$p.$6;
   }
   return $_[0];
 }
@@ -53,7 +55,45 @@ sub calculate {
   }
   return sum(mult($_[0]));
 }
+=pod
 #MAIN------------
 my $exp = <STDIN>;
 chomp( $exp );
 print calculate($exp)."\n";
+=cut
+
+#Partes de CGI
+my $q = CGI->new;
+my $ex = $q->param("ex");
+my $ans = calculate($ex);
+#INICIANDO HTML
+print "Content-type: text/html\n\n";
+print<<OJOSAZULES
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Calculadora en perl</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+  </head>
+
+  <body>
+    <h1>Calculadora :)</h1>
+    <form action="calcular.pl" method="GET">
+      <label type="text" name="ex">Ingrese su operación algebraica:</label>
+      <br>
+      <input type="text" name="ex" value="$ex">
+      <br>
+      <input type="submit" value="Calcular">
+    </form>
+    <br>
+    <div>
+      <h2>Resultado:</h2>
+      <p class="answer">$ans</p>
+    </div>
+
+  </body>
+</html>
+
+OJOSAZULES
+
